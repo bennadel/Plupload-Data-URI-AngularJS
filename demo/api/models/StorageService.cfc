@@ -46,6 +46,8 @@ component
 		// Get the bucketed date for which URL will be valid.
 		var nextYear = createDate( ( year( now() ) + 1 ) , 1, 1 );
 
+		// TODO: Implement "response-cache-control" to override the Cache-Control headers
+		// of the response. My current S3Lite implementaiton doesn't afford this.
 		return( s3Lite.getPreSignedUrl( "#keyPrefix#/#image.id#.#image.fileExtension#", nextYear ) );
 
 	}
@@ -99,7 +101,7 @@ component
 		);
 
 		// NOTE: We are quoting the keys here because we know that this data will have to be
-		// serialized in the HTTP response. 
+		// serialized in an HTTP response. 
 		var settings = {
 			"url" = formPostSettings.url,
 			"data" = {

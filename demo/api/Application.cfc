@@ -35,15 +35,15 @@ component
 			application.aws.secretKey
 		);
 
-		// I hold the image that were uploaded to the application.
-		application.images = new models.ImageCollection();
-
 		// I faciliate storage and retreival of the physical image binaries.
 		application.storageService = new models.StorageService( 
 			application.s3, 
 			application.aws.accessID,
 			"pluploads/data-uri"
 		);
+
+		// I hold the image that were uploaded to the application.
+		application.images = new models.ImageCollection();
 
 		// Return true so that the request can continue loading.
 		return( true );

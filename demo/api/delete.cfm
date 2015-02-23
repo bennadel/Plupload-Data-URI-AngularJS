@@ -1,8 +1,8 @@
 <cfscript>
 	
 	// ------------------------------------------------------------------------------- --
-	// NOTE: For this demo we're not going to worry about deleting the files from Amazon 
-	// S3. That's a bit beyond the scope of the demo.
+	// NOTE: For this demo we're not going to worry about deleting the files from 
+	// Amazon S3. That's a bit beyond the scope of the demo.
 	// ------------------------------------------------------------------------------- --
 
 	// I am the ID of the image being deleted.

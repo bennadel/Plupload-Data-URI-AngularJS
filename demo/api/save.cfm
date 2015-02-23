@@ -49,6 +49,7 @@
 			"fileExtension" = image.fileExtension,
 			"mimeType" = image.mimeType,
 			"isFileAvailable" = image.isFileAvailable,
+			"createdAt" = image.createdAt,
 			"updatedAt" = image.updatedAt,
 			"imageUrl" = application.storageService.getImageUrl( image )
 		},
