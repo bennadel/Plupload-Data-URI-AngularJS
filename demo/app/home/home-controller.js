@@ -127,7 +127,11 @@ app.controller(
 					},
 					function handleSaveReject( error ) {
 
-						alert( "For some reason we couldn't save the file, %s.", file.name );
+						alert( "For some reason we couldn't save the file, " + file.name );
+
+						// Pass-through the error (will ALSO be handled by the next 
+						// error handler in the upload chain).
+						return( $q.reject( error ) );
 
 					}
 				)
@@ -171,8 +175,10 @@ app.controller(
 						image.isFileAvailable = true;
 
 					},
-					function handleUploadReject() {
+					function handleUploadReject( error ) {
 						
+						// CAUTION: The way this promise chain is configured, this error 
+						// handler will also be invoked for "Save" errors as well.
 						alert( "For some reason we couldn't upload one of your files." );
 
 					},
