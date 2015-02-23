@@ -1,0 +1,134 @@
+<!doctype html>
+<html ng-app="PluploadApp">
+<head>
+	<meta charset="utf-8" />
+
+	<title>
+		Consuming Plupload Data URIs In An AngularJS Application
+	</title>
+
+	<link rel="stylesheet" type="text/css" href="css/app.css"></link>
+</head>
+<body ng-controller="HomeController">
+
+	<h1>
+		Consuming Plupload Data URIs In An AngularJS Application
+	</h1>
+
+
+	<!-- BEGIN: Global Uploader. -->
+	<div 
+		bn-global-uploader 
+		class="m-global-uploader"
+		ng-class="{ active: queue.length }">
+
+		<ul class="queue">
+			<li 
+				ng-repeat="item in queue track by item.id" 
+				class="item">
+
+				{{ item.percent }}%
+
+			</li>
+		</ul>
+
+	</div>
+	<!-- END: Global Uploader. -->
+
+
+	<!-- BEGIN: Home Section. -->
+	<div ng-controller="HomeController">
+
+		<h2>
+			My Images
+		</h2>
+
+		<!-- BEGIN: Local Uploader. -->
+		<div 
+			bn-local-uploader="saveFiles( files )"
+			class="m-local-uploader">
+			
+			<div class="instructions">
+				<span class="ready">Drag &amp; Drop Images</span>
+				<span class="hold">Preparing Upload...</span>
+			</div>
+
+		</div>
+		<!-- END: Local Uploader. -->
+
+
+		<!-- BEGIN: Image List. -->
+		<ul class="m-images">
+			<li 
+				ng-repeat="image in images" 
+				class="image">
+
+				<a ng-click="openImage( image )" class="action">
+
+					<div ng-switch="image.isFileAvailable" class="thumbnail">
+						<span ng-switch-when="false">Uploading...</span>
+						<img ng-switch-when="true" ng-src="{{ image.imageUrl }}" />
+					</div>
+
+					<div class="name">
+						{{ image.clientFilename }}
+					</div>
+
+				</a>
+
+				<a ng-click="deleteImage( image )" class="delete">&times;</a>
+
+			</li>
+		</ul>
+		<!-- END: Image List. -->
+
+		
+		<!-- BEGIN: Image Detail. -->
+		<div 
+			ng-if="selectedImageID"
+			ng-controller="DetailController">
+
+			<div ng-click="closeImage()" class="m-image-detail">
+
+				<div class="container">
+					<img 
+						ng-if="image.isFileAvailable"
+						ng-src="{{ image.imageUrl }}" 
+						/>
+				</div>
+
+				<div class="info">
+					<div class="name">{{ image.clientFilename }}</div>
+					<div class="date">Uploaded on {{ image.dateLabel }}</div>
+				</div>
+
+			</div>
+
+		</div>
+		<!-- END: Image Detail. -->
+
+	</div>
+	<!-- END: Home Section. -->
+
+
+	<!-- Vendor Scripts. -->
+	<script type="text/javascript" src="vendor/jquery/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="vendor/angular/angular-1.3.13.min.js"></script>
+	<script type="text/javascript" src="vendor/plupload/plupload.full.min.js"></script>
+	<script type="text/javascript" src="vendor/lodash/lodash-3.3.0.min.js"></script>
+
+	<!-- Application Scripts. -->
+	<script type="text/javascript" src="app/app.js"></script>
+	<script type="text/javascript" src="app/detail/detail-controller.js"></script>
+	<script type="text/javascript" src="app/global-uploader/global-uploader-directive.js"></script>
+	<script type="text/javascript" src="app/home/home-controller.js"></script>
+	<script type="text/javascript" src="app/local-uploader/local-uploader-directive.js"></script>
+	<script type="text/javascript" src="app/services/data-uri-cache-service.js"></script>
+	<script type="text/javascript" src="app/services/global-uploader-service.js"></script>
+	<script type="text/javascript" src="app/services/image-service.js"></script>
+	<script type="text/javascript" src="app/services/lodash-service.js"></script>
+	<script type="text/javascript" src="app/services/natural-sort-service.js"></script>
+	<script type="text/javascript" src="app/services/plupload-service.js"></script>
+
+</body>
+</html>
